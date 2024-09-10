@@ -143,7 +143,7 @@ async def start_claim(account: list, id_acc: int, semaphore) -> None:
         if sleep_time != 0:
             logger.info(f'Sleep {sleep_time} sec...')
             await asyncio.sleep(sleep_time)
-        return tokens
+        return tokens if tokens != 0 else 0
 
 
 async def main() -> None:
