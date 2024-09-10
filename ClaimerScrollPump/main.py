@@ -129,7 +129,7 @@ class Claimer:
                 raise Exception(f'Error: {str(e)}')
 
 
-async def start_claim(account: list, id_acc: int, semaphore) -> None:
+async def start_claim(account: list, id_acc: int, semaphore) -> int:
     async with semaphore:
         acc = Claimer(private_key=account[0], proxy=account[1], number_acc=id_acc)
         try:
@@ -143,7 +143,7 @@ async def start_claim(account: list, id_acc: int, semaphore) -> None:
         if sleep_time != 0:
             logger.info(f'Sleep {sleep_time} sec...')
             await asyncio.sleep(sleep_time)
-        return tokens if tokens is int else 0
+        return tokens if tokens is not None else 0
 
 
 async def main() -> None:
