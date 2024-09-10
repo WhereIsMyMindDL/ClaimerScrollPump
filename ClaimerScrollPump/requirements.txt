@@ -1,0 +1,4 @@
+aiohttp==3.9.5
+loguru==0.7.2
+pandas==2.2.2
+web3==6.19.0
