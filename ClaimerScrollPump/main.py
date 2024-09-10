@@ -138,12 +138,13 @@ async def start_claim(account: list, id_acc: int, semaphore) -> int:
 
         except Exception as e:
             logger.error(f'{id_acc} Failed: {str(e)}')
-
+            tokens = 0
+            
         sleep_time = random.randint(delay_wallets[0], delay_wallets[1])
         if sleep_time != 0:
             logger.info(f'Sleep {sleep_time} sec...')
             await asyncio.sleep(sleep_time)
-        return tokens if tokens is not None else 0
+        return tokens
 
 
 async def main() -> None:
