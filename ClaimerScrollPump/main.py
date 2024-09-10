@@ -115,11 +115,11 @@ class Claimer:
                         await asyncio.sleep(5)
 
                 if receipt['status'] == 1:
-                    logger.success(f'{self.account.address}: Success claim {amount} PUMP: {self.scan + tx_hash}')
+                    logger.success(f'{self.account.address}: Success claim {reward} PUMP: {self.scan + tx_hash}')
                     return reward
 
                 else:
-                    logger.error(f'{self.account.address}: Failed claim {amount} PUMP: {self.scan + tx_hash}')
+                    logger.error(f'{self.account.address}: Failed claim {reward} PUMP: {self.scan + tx_hash}')
                     raise ValueError("Transaction Failed")
 
             except Exception as e:
