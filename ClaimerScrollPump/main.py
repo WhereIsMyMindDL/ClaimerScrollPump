@@ -8,7 +8,7 @@ from sys import stderr
 from loguru import logger
 from web3.eth import AsyncEth
 
-from settings import delay_wallets
+from settings import delay_wallets, ref_address
 
 logger.remove()
 logger.add(stderr,
@@ -90,7 +90,7 @@ class Claimer:
             transaction = await contract.functions.claim(
                 int(amount),
                 sign,
-                Web3.to_checksum_address('0xeeeba9ab3668c2c8e3bdebf618a7eb985c6add76')
+                Web3.to_checksum_address(ref_address)
             ).build_transaction({
                 "from": self.account.address,
                 "gasPrice": int(await self.w3.eth.gas_price * 1.05),
