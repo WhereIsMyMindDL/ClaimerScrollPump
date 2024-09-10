@@ -66,6 +66,9 @@ class Claimer:
                 proxy=self.proxy
             )
             response_json: dict = await response.json()
+            if not response_json['success']:
+                logger.info(f'{self.account.address} Not eligble :(')
+                return 0
             reward: int = response_json['data']['baseReward'] + response_json['data']['bonusReward']
 
             if int(reward) == 0:
@@ -137,7 +140,7 @@ async def start_claim(account: list, id_acc: int, semaphore) -> int:
             tokens = await acc.claim()
 
         except Exception as e:
-            logger.error(f'{id_acc} Failed: {str(e)}')
+            logger.error(f'{id_acc} {acc.account.address} Failed: {str(e)}')
             tokens = 0
             
         sleep_time = random.randint(delay_wallets[0], delay_wallets[1])
